@@ -1,27 +1,85 @@
-# MlConferencia
+# Sistema de Conferência de Pacotes (MVP)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+## Visão Geral
 
-## Development server
+Este projeto é uma Prova de Conceito (POC) desenvolvida em Angular para digitalizar o processo de conferência de pacotes em uma operação logística vinculada ao Mercado Livre, substituindo a conferência manual em papel por uma solução reativa, auditável e com rastreabilidade.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+O sistema permite:
 
-## Code scaffolding
+- Importar listas de pacotes vindas do Mercado Livre (CSV/Excel ou texto).
+- Ler códigos de barras via scanner.
+- Comparar a lista oficial com o que foi bipado.
+- Classificar automaticamente pacotes em categorias (OK, faltantes, excedentes).
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Esta POC é a base para evolução futura, mantendo uma arquitetura escalável e organizada por domínios.
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Objetivo do MVP
 
-## Running unit tests
+- Garantir conferência digital com rastreabilidade.
+- Substituir ticagem manual em papel.
+- Reduzir divergências, perdas e suspeitas de fraude.
+- Prover um estado reativo e atualizado em tempo real da conferência.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Funcionalidades principais
 
-## Running end-to-end tests
+- Importar lista oficial de IDs (planilha ou texto colado).
+- Bipar códigos de barras via leitor USB (como entrada de teclado).
+- Comparar lista oficial x lista bipada.
+- Classificar pacotes em:
+  - OK
+  - Faltantes
+  - Excedentes
+- Exibir resultados em tempo real.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+*(Versões futuras: controle de devoluções, motivos, inventário, histórico e dashboards.)*
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Arquitetura da Aplicação
+
+A aplicação utiliza uma Arquitetura Híbrida moderna em Angular, combinando:
+
+- RxJS para tratar fluxos de eventos contínuos (scanner, importação).
+- Angular Signals para armazenar o estado final derivado e expor para a UI.
+- Organização por domínio para isolar regras de negócio (Conference, Returns, Inventory, etc.).
+- Standalone Components, sem uso obrigatório de NgModules.
+
+Em resumo:
+
+- Eventos (scanner, Excel) entram como Observables.
+- São processados em pipelines RxJS (ConferenceStream).
+- O resultado é armazenado em Signals (ConferenceStore).
+- A UI consome Signals, sem lidar diretamente com Observables.
+
+---
+
+## Estrutura de Diretórios
+
+```bash
+src/app/
+├── core/
+│   ├── models/                 # Tipos e entidades de domínio
+│   ├── services/               # Serviços técnicos e utilitários
+│   │   ├── excel.service.ts         # Importa planilhas -> stream de IDs
+│   │   ├── scanner.service.ts       # Captura bipagens -> stream de IDs
+│   │   └── storage.service.ts       # Persistência local (futuro)
+│   └── utils/                  # Funções auxiliares (parsers, etc.)
+│
+├── domains/
+│   └── conference/
+│       ├── streams/            # Pipelines RxJS (lógica reativa)
+│       │   └── conference.stream.ts
+│       ├── state/              # Store reativo com Signals
+│       │   └── conference.store.ts
+│       ├── pages/              # Containers principais de tela
+│       │   └── conference.page.ts
+│       └── components/         # Componentes de UI do domínio
+│           ├── import-panel/
+│           ├── scan-input/
+│           ├── result-panel/
+│           └── status-cards/
+│
+└── shared/
+    └── components/             # Componentes genéricos reutilizáveis
