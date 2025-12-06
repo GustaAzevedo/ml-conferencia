@@ -1,0 +1,14 @@
+<!-- Simple wrapper to capture manual inputs or simulate scans. -->
+<div class="scan-input">
+  <label for="scanInput">Entrada do scanner</label>
+  <div class="scan-input__controls">
+    <input
+      id="scanInput"
+      type="text"
+      [placeholder]="placeholder"
+      #scanBox
+      (keyup.enter)="submitFrom(scanBox)"
+    />
+    <button type="button" (click)="submitFrom(scanBox)">Registrar</button>
+  </div>
+</div>

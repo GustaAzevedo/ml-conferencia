@@ -44,7 +44,17 @@ A aplicação utiliza uma Arquitetura Híbrida moderna em Angular, combinando:
 - RxJS para tratar fluxos de eventos contínuos (scanner, importação).
 - Angular Signals para armazenar o estado final derivado e expor para a UI.
 - Organização por domínio para isolar regras de negócio (Conference, Returns, Inventory, etc.).
-- Standalone Components, sem uso obrigatório de NgModules.
+- Standalone Components sem uso obrigatório de NgModules e rotas lazy com `loadComponent`.
+
+O shell (`AppComponent`) rende a navegação principal e um `<router-outlet>`, enquanto cada rota principal carrega seu container sob demanda:
+
+| Rota | Componente | Responsabilidade |
+| --- | --- | --- |
+| `/` | `DashboardPageComponent` | KPIs resumidos e atalhos para as etapas operacionais. |
+| `/importacao` | `ImportPageComponent` | Importa planilhas CSV/XLSX e publica a lista oficial. |
+| `/scanner` | `ScannerPageComponent` | Concentra as leituras do scanner/manual e atualiza o estado em tempo real. |
+
+Todos os containers consomem o mesmo `ConferenceStore`, que expõe `totals`, `officialRows` e `scannedRows`, e emitem efeitos via `ConferenceStream`.
 
 Em resumo:
 
@@ -59,6 +69,7 @@ Em resumo:
 
 ```bash
 src/app/
+├── app.routes.ts            # Rotas lazy para dashboard/importação/scanner
 ├── core/
 │   ├── models/                 # Tipos e entidades de domínio
 │   ├── services/               # Serviços técnicos e utilitários
@@ -68,13 +79,18 @@ src/app/
 │   └── utils/                  # Funções auxiliares (parsers, etc.)
 │
 ├── domains/
+│   ├── dashboard/
+│   │   └── pages/
+│   │       └── dashboard-page.component.*
 │   └── conference/
 │       ├── streams/            # Pipelines RxJS (lógica reativa)
 │       │   └── conference.stream.ts
 │       ├── state/              # Store reativo com Signals
 │       │   └── conference.store.ts
 │       ├── pages/              # Containers principais de tela
-│       │   └── conference.page.ts
+│       │   ├── conference-page/
+│       │   ├── import-page/
+│       │   └── scanner-page/
 │       └── components/         # Componentes de UI do domínio
 │           ├── import-panel/
 │           ├── scan-input/
@@ -83,3 +99,7 @@ src/app/
 │
 └── shared/
     └── components/             # Componentes genéricos reutilizáveis
+
+docs/
+└── architecture.md            # Visão arquitetural detalhada
+```

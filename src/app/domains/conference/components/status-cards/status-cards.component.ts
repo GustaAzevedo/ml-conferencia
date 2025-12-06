@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
   imports: [CommonModule],
   selector: 'app-status-cards',
-  template: `
-    <div class="status-cards">
-      <div>OK: --</div>
-      <div>Missing: --</div>
-      <div>Extra: --</div>
-    </div>
-  `
+  templateUrl: './status-cards.component.html',
+  styleUrls: ['./status-cards.component.scss']
 })
-export class StatusCardsComponent {}
+export class StatusCardsComponent {
+  // Totais computados pelo store e repassados pela página hospedeira.
+  @Input() ok = 0;
+  @Input() missing = 0;
+  @Input() extra = 0;
+}

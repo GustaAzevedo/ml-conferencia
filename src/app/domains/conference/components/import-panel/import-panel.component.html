@@ -1,0 +1,13 @@
+<!-- Component responsible for collecting the spreadsheet file from the operator. -->
+<div class="import-panel">
+  <h3>Importar lista oficial</h3>
+  <p>Escolha um arquivo CSV/XLSX para carregar os códigos oficiais no estado.</p>
+
+  <label class="import-panel__picker">
+    <span>Selecionar arquivo</span>
+    <input type="file" accept=".csv,.xlsx,.xls" (change)="handleFileChange($event)" />
+  </label>
+
+  <p class="import-panel__hint">{{ isLoading ? 'Processando arquivo...' : 'O arquivo não é enviado ao servidor.' }}</p>
+  <p *ngIf="errorMessage" class="import-panel__error">{{ errorMessage }}</p>
+</div>

@@ -1,0 +1,23 @@
+<!-- Import workflow binds the panel with the preview table and summary cards. -->
+<section class="import-page">
+  <app-import-panel
+    [isLoading]="isLoading()"
+    [errorMessage]="errorMessage()"
+    (fileSelected)="handleFileSelected($event)"
+  ></app-import-panel>
+
+  <app-status-cards
+    [ok]="totals().ok"
+    [missing]="totals().missing"
+    [extra]="totals().extra"
+  ></app-status-cards>
+
+  <section class="import-page__preview" *ngIf="officialRows().length; else emptyState">
+    <h4>Prévia da lista oficial</h4>
+    <app-grid-table [columns]="gridColumns" [rows]="officialRows()"></app-grid-table>
+  </section>
+
+  <ng-template #emptyState>
+    <p>Nenhum arquivo importado ainda. Utilize o painel acima para iniciar.</p>
+  </ng-template>
+</section>

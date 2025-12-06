@@ -1,0 +1,28 @@
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.dashboard-page__metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.dashboard-page__metrics div {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+.dashboard-page__metrics span {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.dashboard-page__metrics strong {
+  display: block;
+  font-size: 1.5rem;
+  margin-top: 0.25rem;
+}

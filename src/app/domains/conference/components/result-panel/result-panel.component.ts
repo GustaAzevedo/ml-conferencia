@@ -5,10 +5,9 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   selector: 'app-result-panel',
-  template: `
-    <div class="result-panel">
-      <h3>Result Panel (placeholder)</h3>
-    </div>
-  `
+  templateUrl: './result-panel.component.html',
+  styleUrls: ['./result-panel.component.scss']
 })
-export class ResultPanelComponent {}
+export class ResultPanelComponent {
+  // Reservado para gráficos/listagens específicos da conferência em versões futuras.
+}

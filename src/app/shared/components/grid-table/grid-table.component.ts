@@ -5,25 +5,12 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   selector: 'app-grid-table',
-  template: `
-    <div class="grid-table">
-      <table>
-        <thead>
-          <tr>
-            <th *ngFor="let c of columns">{{ c }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let row of rows">
-            <td *ngFor="let c of columns">{{ row[c] }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  `,
-  styles: [`.grid-table { width: 100%; overflow: auto; } table { width: 100%; border-collapse: collapse; } th, td { padding: 8px; border: 1px solid #ddd; }`]
+  templateUrl: './grid-table.component.html',
+  styleUrls: ['./grid-table.component.scss']
 })
 export class GridTableComponent {
+  // Nomes das colunas definem tanto os cabeçalhos quanto as chaves lidas em cada linha.
   @Input() columns: string[] = [];
+  // Objetos arbitrários para que o componente permaneça genérico.
   @Input() rows: any[] = [];
 }
