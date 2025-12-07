@@ -1,11 +1,29 @@
-.scanner-page {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+:host {
+	display: block;
 }
 
-.scanner-page__log {
-  border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
-  padding: 1rem;
+.scanner-page {
+	display: flex;
+	flex-direction: column;
+	gap: var(--ml-space-xl, 2rem);
+}
+
+.scanner-page__row {
+	display: flex;
+	flex-direction: column;
+	gap: var(--ml-space-lg, 1.25rem);
+	align-items: center;
+}
+
+.scanner-page__row > * {
+	width: 100%;
+}
+
+.scanner-page__table {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.scanner-page__table--empty {
+	text-align: center;
 }

@@ -6,11 +6,12 @@ import { ImportPanelComponent } from '../../components/import-panel/import-panel
 import { StatusCardsComponent } from '../../components/status-cards/status-cards.component';
 import { ConferenceStore } from '../../state/conference.store';
 import { ConferenceStream } from '../../streams/conference.stream';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   standalone: true,
   selector: 'app-import-page',
-  imports: [CommonModule, ImportPanelComponent, GridTableComponent, StatusCardsComponent],
+  imports: [CommonModule, ImportPanelComponent, GridTableComponent, StatusCardsComponent, MatCardModule],
   templateUrl: './import-page.component.html',
   styleUrls: ['./import-page.component.scss']
 })

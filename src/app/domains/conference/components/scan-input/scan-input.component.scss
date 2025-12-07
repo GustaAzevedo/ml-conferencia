@@ -1,26 +1,36 @@
-.scan-input {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+@use 'sass:map';
+
+:host {
+	display: block;
 }
 
-.scan-input__controls {
-  display: flex;
-  gap: 0.5rem;
+mat-card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--ml-space-md, 1rem);
+	align-items: center;
 }
 
-.scan-input__controls input {
-  flex: 1;
-  padding: 0.5rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
+mat-card-header,
+mat-card-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: var(--ml-space-md, 1rem);
 }
 
-.scan-input__controls button {
-  border: none;
-  background: #1d4ed8;
-  color: #fff;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.375rem;
-  cursor: pointer;
+.scan-form-field {
+	width: min(520px, 100%);
 }
+
+.scan-actions {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.scan-actions button {
+	min-width: 220px;
+}
+/* Estilos substituídos por componentes Angular Material. */

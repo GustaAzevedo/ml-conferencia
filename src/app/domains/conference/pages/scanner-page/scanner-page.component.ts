@@ -7,11 +7,12 @@ import { ScanInputComponent } from '../../components/scan-input/scan-input.compo
 import { StatusCardsComponent } from '../../components/status-cards/status-cards.component';
 import { ConferenceStore } from '../../state/conference.store';
 import { ConferenceStream } from '../../streams/conference.stream';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   standalone: true,
   selector: 'app-scanner-page',
-  imports: [CommonModule, ScanInputComponent, StatusCardsComponent, GridTableComponent],
+  imports: [CommonModule, ScanInputComponent, StatusCardsComponent, GridTableComponent, MatCardModule],
   templateUrl: './scanner-page.component.html',
   styleUrls: ['./scanner-page.component.scss']
 })

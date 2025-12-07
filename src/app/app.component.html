@@ -1,25 +1,20 @@
-<!-- Shell layout: contains persistent navigation and outlet for lazy views. -->
-<div class="app-shell">
-  <!-- Header summarizes the active workspace. -->
-  <header class="app-shell__header">
-    <h1>{{ title }}</h1>
-    <p>Conferência digital com rotas carregadas sob demanda.</p>
-  </header>
-
-  <!-- Navigation renders router links based on the component configuration. -->
-  <nav class="app-shell__nav" aria-label="Menu principal">
+<mat-toolbar color="primary" class="app-toolbar" role="navigation">
+  <span class="app-toolbar__brand">{{ title }}</span>
+  <span class="app-toolbar__spacer"></span>
+  <nav class="app-toolbar__nav" aria-label="Menu principal">
     <a
       *ngFor="let link of navLinks"
+      mat-button
       [routerLink]="link.path"
-      routerLinkActive="app-shell__nav-link--active"
-      class="app-shell__nav-link"
+      routerLinkActive="active-link"
       [routerLinkActiveOptions]="{ exact: link.path === '/' }"
     >
       {{ link.label }}
     </a>
   </nav>
+</mat-toolbar>
 
-  <!-- Routed content is lazy loaded below. -->
+<div class="app-shell">
   <main class="app-shell__content">
     <router-outlet />
   </main>

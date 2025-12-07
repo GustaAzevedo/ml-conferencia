@@ -26,6 +26,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('ml-conferencia');
+    expect(compiled.querySelector('.app-toolbar__brand')?.textContent).toContain('ml-conferencia');
   });
 });

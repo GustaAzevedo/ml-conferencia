@@ -1,15 +1,11 @@
-<!-- Simple data table used both on import and scanner screens. -->
-<div class="grid-table">
-  <table>
-    <thead>
-      <tr>
-        <th *ngFor="let c of columns">{{ c }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let row of rows">
-        <td *ngFor="let c of columns">{{ row[c] }}</td>
-      </tr>
-    </tbody>
+<mat-card appearance="outlined" class="full-width">
+  <table mat-table [dataSource]="rows" class="mat-elevation-z1">
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
+      <td mat-cell *matCellDef="let row">{{ row[column] }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-</div>
+</mat-card>

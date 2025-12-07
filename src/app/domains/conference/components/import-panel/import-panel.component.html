@@ -1,13 +1,56 @@
-<!-- Component responsible for collecting the spreadsheet file from the operator. -->
-<div class="import-panel">
-  <h3>Importar lista oficial</h3>
-  <p>Escolha um arquivo CSV/XLSX para carregar os códigos oficiais no estado.</p>
+<mat-card appearance="outlined" class="import-panel">
+  <mat-card-header>
+    <mat-card-title>Importar lista oficial</mat-card-title>
+    <mat-card-subtitle>Selecione a planilha (IDs coluna A, motivos coluna C) e confirme a importação.</mat-card-subtitle>
+  </mat-card-header>
 
-  <label class="import-panel__picker">
-    <span>Selecionar arquivo</span>
-    <input type="file" accept=".csv,.xlsx,.xls" (change)="handleFileChange($event)" />
-  </label>
+  <mat-card-content class="import-panel__content">
+    <div class="import-panel__input-grid">
+      <mat-form-field appearance="outline" class="import-panel__field">
+        <mat-label>Arquivo selecionado</mat-label>
+        <input matInput [value]="lastFileName || 'Nenhum arquivo escolhido'" readonly required />
+        <mat-hint>Processamento local — nada é enviado ao servidor.</mat-hint>
+        <mat-error *ngIf="showValidationError">Selecione um arquivo antes de importar.</mat-error>
+      </mat-form-field>
 
-  <p class="import-panel__hint">{{ isLoading ? 'Processando arquivo...' : 'O arquivo não é enviado ao servidor.' }}</p>
-  <p *ngIf="errorMessage" class="import-panel__error">{{ errorMessage }}</p>
-</div>
+      <button
+        mat-stroked-button
+        color="primary"
+        class="import-panel__pick"
+        type="button"
+        [disabled]="isLoading"
+        (click)="fileInput.click()"
+      >
+        <mat-icon>upload_file</mat-icon>
+        Escolher arquivo
+      </button>
+    </div>
+
+    <input
+      #fileInput
+      type="file"
+      accept=".csv,.xlsx,.xls"
+      hidden
+      (change)="handleFileChange($event)"
+    />
+
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+    <mat-chip-set *ngIf="errorMessage" class="import-panel__error">
+      <mat-chip color="warn" selected>
+        <mat-icon>error</mat-icon>
+        {{ errorMessage }}
+      </mat-chip>
+    </mat-chip-set>
+  </mat-card-content>
+
+  <mat-card-actions class="import-panel__actions">
+    <button mat-stroked-button type="button" (click)="clearSelection()" [disabled]="!lastFileName || isLoading">
+      Limpar seleção
+    </button>
+    <button mat-flat-button color="primary" type="button" (click)="confirmImport()" [disabled]="isLoading">
+      Importar lista
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

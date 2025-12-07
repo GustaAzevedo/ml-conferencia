@@ -1,25 +1,57 @@
-.status-cards {
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+:host {
+	display: block;
 }
 
-.status-cards__card {
-  border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
-  padding: 0.75rem;
-  background: #f9fafb;
+.status-card-grid {
+	display: grid;
+	grid-template-columns: var(--dashboard-status-columns, repeat(auto-fit, minmax(200px, 1fr)));
+	gap: var(--ml-space-lg, 1.5rem);
+	grid-auto-rows: 1fr;
 }
 
-.status-cards__card h4 {
-  margin: 0;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  color: #6b7280;
+.status-card {
+	min-height: 160px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	gap: var(--ml-space-sm, 0.5rem);
+	height: 100%;
+	padding: var(--ml-space-md, 1rem);
+	color: rgba(15, 23, 42, 0.85);
+	border: 1px solid rgba(15, 23, 42, 0.1);
+	box-sizing: border-box;
 }
 
-.status-cards__card p {
-  margin: 0.25rem 0 0;
-  font-size: 1.5rem;
-  font-weight: 600;
+.status-card .mat-mdc-card-subtitle {
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	font-weight: 600;
+	color: currentColor;
+	opacity: 0.8;
+}
+
+.status-card .mat-mdc-card-title {
+	font-size: clamp(1.75rem, 1vw + 1.25rem, 2.5rem);
+	font-weight: 700;
+	color: currentColor;
+}
+
+.status-card[data-status='ok'] {
+	background: var(--ml-color-success-soft, #e8f5e9);
+	border-color: var(--ml-color-success, #2e7d32);
+	color: var(--ml-color-success, #2e7d32);
+}
+
+.status-card[data-status='missing'] {
+	background: var(--ml-color-danger-soft, #fdecea);
+	border-color: var(--ml-color-danger, #c62828);
+	color: var(--ml-color-danger, #c62828);
+}
+
+.status-card[data-status='extra'] {
+	background: var(--ml-color-warning-soft, #fff8e1);
+	border-color: var(--ml-color-warning, #f9a825);
+	color: var(--ml-color-warning, #f9a825);
 }

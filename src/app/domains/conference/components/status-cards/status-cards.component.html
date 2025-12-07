@@ -1,17 +1,11 @@
-<!-- Display of summary cards with the latest import status. -->
-<div class="status-cards">
-  <article class="status-cards__card">
-    <h4>OK</h4>
-    <p>{{ ok }}</p>
-  </article>
-
-  <article class="status-cards__card">
-    <h4>Faltantes</h4>
-    <p>{{ missing }}</p>
-  </article>
-
-  <article class="status-cards__card">
-    <h4>Excedentes</h4>
-    <p>{{ extra }}</p>
-  </article>
+<div class="status-card-grid">
+  <mat-card
+    appearance="outlined"
+    class="status-card"
+    *ngFor="let metric of metrics"
+    [attr.data-status]="metric.status"
+  >
+    <mat-card-subtitle>{{ metric.label }}</mat-card-subtitle>
+    <mat-card-title>{{ metric.value }}</mat-card-title>
+  </mat-card>
 </div>

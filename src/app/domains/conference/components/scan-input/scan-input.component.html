@@ -1,14 +1,26 @@
-<!-- Simple wrapper to capture manual inputs or simulate scans. -->
-<div class="scan-input">
-  <label for="scanInput">Entrada do scanner</label>
-  <div class="scan-input__controls">
-    <input
-      id="scanInput"
-      type="text"
-      [placeholder]="placeholder"
-      #scanBox
-      (keyup.enter)="submitFrom(scanBox)"
-    />
-    <button type="button" (click)="submitFrom(scanBox)">Registrar</button>
-  </div>
-</div>
+<mat-card appearance="outlined" class="scan-panel">
+  <mat-card-header>
+    <mat-card-title>Entrada do scanner</mat-card-title>
+    <mat-card-subtitle>Utilize o leitor ou digite manualmente para disparar o fluxo.</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field appearance="outline" class="scan-form-field">
+      <mat-label>{{ placeholder }}</mat-label>
+      <input
+        matInput
+        #scanBox
+        type="text"
+        (keyup.enter)="submitFrom(scanBox)"
+        autocomplete="off"
+      />
+      <button mat-icon-button matSuffix color="primary" (click)="submitFrom(scanBox)">
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="scan-actions">
+      <button mat-raised-button color="primary" (click)="submitFrom(scanBox)">
+        Registrar
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
