@@ -21,4 +21,17 @@
       <strong>{{ scannedCount() }}</strong>
     </div>
   </section>
+
+  <section class="dashboard-page__issues">
+    <header>
+      <h3>Distribuição por motivo</h3>
+      <p>Origem dos desvios apontados durante a importação.</p>
+    </header>
+    <ul>
+      <li *ngFor="let bucket of issueBreakdown">
+        <span>{{ bucket.label }}</span>
+        <strong>{{ issueTotals()[bucket.reason] }}</strong>
+      </li>
+    </ul>
+  </section>
 </section>

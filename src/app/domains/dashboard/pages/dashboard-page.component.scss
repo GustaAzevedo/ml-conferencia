@@ -26,3 +26,48 @@
   font-size: 1.5rem;
   margin-top: 0.25rem;
 }
+
+.dashboard-page__issues {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dashboard-page__issues h3 {
+  margin: 0;
+}
+
+.dashboard-page__issues p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.dashboard-page__issues ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.dashboard-page__issues li {
+  border: 1px solid #f3f4f6;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  background: #f9fafb;
+}
+
+.dashboard-page__issues span {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.dashboard-page__issues strong {
+  display: block;
+  font-size: 1.4rem;
+  margin-top: 0.25rem;
+}

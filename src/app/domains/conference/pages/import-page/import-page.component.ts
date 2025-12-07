@@ -28,16 +28,16 @@ export class ImportPageComponent {
   readonly officialRows = this.store.officialRows;
 
   // Colunas da grid definidas uma vez para manter o template simples.
-  readonly gridColumns = ['ordem', 'id'];
+  readonly gridColumns = ['ordem', 'id', 'motivo'];
 
   // Trata o arquivo emitido pelo painel de importação.
   async handleFileSelected(file: File) {
     this.errorMessage.set(null);
     this.isLoading.set(true);
     try {
-      const ids = await this.excelService.parseWorkbook(file);
-      this.store.setOfficial(ids);
-      this.stream.emitImport(ids);
+      const entries = await this.excelService.parseWorkbook(file);
+      this.store.setOfficial(entries);
+      this.stream.emitImport(entries);
     } catch (error) {
       console.error('Erro ao ler planilha', error);
       this.errorMessage.set('Não foi possível ler o arquivo informado.');
