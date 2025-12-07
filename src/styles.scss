@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 
+/* === Material Bootstrap ============================================== */
 @include mat.core();
 
 $ml-primary: mat.define-palette(mat.$deep-purple-palette, 600);
@@ -19,6 +20,7 @@ $ml-theme: mat.define-light-theme((
 @include mat.all-component-themes($ml-theme);
 @include mat.typography-hierarchy($ml-theme);
 
+/* === Base Resets ===================================================== */
 html,
 body {
 	height: 100%;
@@ -31,7 +33,9 @@ body {
 	color: var(--mat-app-on-surface-color, #1f1f1f);
 }
 
+/* === Design Tokens =================================================== */
 :root {
+	/* Color tokens */
 	--ml-color-primary: #{mat.get-color-from-palette($ml-primary)};
 	--ml-color-primary-soft: #{mat.get-color-from-palette($ml-primary, 50)};
 	--ml-color-accent: #{mat.get-color-from-palette($ml-accent)};
@@ -52,12 +56,253 @@ body {
 	--ml-color-danger-soft: #fdecea;
 	--ml-surface-base: #f5f5f5;
 	--ml-surface-raised: #ffffff;
+
+	/* Spacing scale */
 	--ml-space-xs: 0.25rem;
 	--ml-space-sm: 0.5rem;
 	--ml-space-md: 1rem;
 	--ml-space-lg: 1.5rem;
 	--ml-space-xl: 2rem;
+
+	/* Layout & breakpoints */
 	--ml-layout-padding: clamp(1rem, 2.5vw, 3rem);
-	--ml-layout-max-width: 1600px;
+	--ml-layout-max-width: 1200px;
 	--ml-grid-columns: repeat(auto-fit, minmax(320px, 1fr));
+	--ml-breakpoint-sm: 600px;
+	--ml-breakpoint-md: 960px;
+	--ml-breakpoint-lg: 1280px;
+
+	/* Component scales */
+	--ml-input-width-sm: min(260px, 100%);
+	--ml-input-width-md: min(420px, 100%);
+	--ml-input-width-lg: min(560px, 100%);
+	--ml-btn-height-sm: 40px;
+	--ml-btn-height-md: 48px;
+	--ml-btn-height-lg: 56px;
+	--ml-btn-gap: 0.35rem;
+	--ml-btn-width-sm: 140px;
+	--ml-btn-width-md: 200px;
+	--ml-btn-width-lg: 260px;
+	--ml-card-max-sm: 480px;
+	--ml-card-max-md: 720px;
+	--ml-card-max-lg: 960px;
+	--ml-card-radius: 16px;
+
+	/* Typography scale */
+	--ml-font-size-sm: 0.875rem;
+	--ml-font-size-md: 1rem;
+	--ml-font-size-lg: 1.25rem;
+}
+
+@media (min-width: 768px) {
+	:root {
+		--ml-input-width-sm: min(300px, 100%);
+		--ml-input-width-md: min(460px, 100%);
+		--ml-input-width-lg: min(620px, 100%);
+		--ml-btn-width-sm: 160px;
+		--ml-btn-width-md: 240px;
+		--ml-btn-width-lg: 320px;
+	}
+}
+
+@media (min-width: 1280px) {
+	:root {
+		--ml-layout-max-width: 1440px;
+		--ml-input-width-sm: 320px;
+		--ml-input-width-md: 520px;
+		--ml-input-width-lg: 680px;
+		--ml-btn-width-sm: 180px;
+		--ml-btn-width-md: 280px;
+		--ml-btn-width-lg: 360px;
+	}
+}
+
+/* === Layout Helpers =============================================== */
+.ml-container {
+	width: 100%;
+	max-width: var(--ml-layout-max-width, 1200px);
+	margin: 0 auto;
+	padding: var(--ml-layout-padding, 1.5rem);
+	box-sizing: border-box;
+}
+
+.ml-stack {
+	display: flex;
+	flex-direction: column;
+	gap: var(--ml-space-lg, 1.5rem);
+}
+
+.ml-panel {
+	display: flex;
+	flex-direction: column;
+	gap: var(--ml-space-md, 1rem);
+}
+
+.ml-panel__content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--ml-space-lg, 1.5rem);
+}
+
+.ml-panel__grid {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: var(--ml-space-md, 1rem);
+	width: 100%;
+}
+
+.ml-panel__actions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--ml-space-md, 1rem);
+	width: 100%;
+}
+
+.ml-panel__actions button {
+	flex: 0 0 auto;
+	min-width: unset;
+}
+
+/* === Component Scales ============================================== */
+.ml-input-sm,
+.ml-input-md,
+.ml-input-lg {
+	max-width: 100%;
+	width: 100%;
+}
+
+.ml-input-sm {
+	max-width: var(--ml-input-width-sm);
+}
+
+.ml-input-md {
+	max-width: var(--ml-input-width-md);
+}
+
+.ml-input-lg {
+	max-width: var(--ml-input-width-lg);
+}
+
+.ml-btn {
+	--ml-btn-size: var(--ml-btn-height-md);
+	--ml-btn-min: var(--ml-btn-width-md);
+	--ml-btn-font: var(--ml-font-size-md);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--ml-btn-gap, 0.35rem);
+	padding-inline: clamp(1rem, 2vw, 1.5rem);
+	padding-block: 0;
+	border-radius: 999px;
+	font-weight: 500;
+	line-height: 1.2;
+	text-transform: none;
+	letter-spacing: 0.01em;
+	width: auto;
+	max-width: 100%;
+	box-sizing: border-box;
+	transition: transform 0.15s ease, box-shadow 0.15s ease;
+	min-height: var(--ml-btn-size);
+	min-width: min(var(--ml-btn-min), 100%);
+	font-size: var(--ml-btn-font);
+	--mdc-text-button-container-height: var(--ml-btn-size);
+	--mdc-outlined-button-container-height: var(--ml-btn-size);
+	--mdc-filled-button-container-height: var(--ml-btn-size);
+	--mdc-protected-button-container-height: var(--ml-btn-size);
+	--mdc-tonal-button-container-height: var(--ml-btn-size);
+	--mdc-unelevated-button-container-height: var(--ml-btn-size);
+}
+
+.ml-btn:focus-visible {
+	outline: 2px solid color-mix(in srgb, var(--ml-color-primary) 60%, transparent);
+	outline-offset: 2px;
+}
+
+.ml-btn:active {
+	transform: translateY(1px);
+}
+
+.ml-btn-block {
+	width: 100%;
+}
+
+.ml-btn-sm {
+	--ml-btn-size: var(--ml-btn-height-sm);
+	--ml-btn-min: var(--ml-btn-width-sm);
+	--ml-btn-font: var(--ml-font-size-sm);
+}
+
+.ml-btn-md {
+	--ml-btn-size: var(--ml-btn-height-md);
+	--ml-btn-min: var(--ml-btn-width-md);
+	--ml-btn-font: var(--ml-font-size-md);
+}
+
+.ml-btn-lg {
+	--ml-btn-size: var(--ml-btn-height-lg);
+	--ml-btn-min: var(--ml-btn-width-lg);
+	--ml-btn-font: var(--ml-font-size-lg);
+}
+
+.ml-card-sm,
+.ml-card-md,
+.ml-card-lg {
+	width: 100%;
+	border-radius: var(--ml-card-radius, 16px);
+	box-sizing: border-box;
+	align-self: stretch;
+}
+
+.ml-card-sm {
+	max-width: var(--ml-card-max-sm);
+}
+
+.ml-card-md {
+	max-width: var(--ml-card-max-md);
+}
+
+.ml-card-lg {
+	max-width: var(--ml-card-max-lg);
+}
+
+.ml-card-full {
+	width: 100%;
+	max-width: var(--ml-layout-max-width, 1200px);
+	margin: 0 auto;
+	border-radius: var(--ml-card-radius, 16px);
+	box-sizing: border-box;
+}
+
+.ml-card-left {
+	align-items: flex-start;
+	text-align: left;
+}
+
+.ml-card-center {
+	align-items: center;
+	text-align: center;
+}
+
+.ml-card-right {
+	align-items: flex-end;
+	text-align: right;
+}
+
+.ml-text-sm {
+	font-size: var(--ml-font-size-sm);
+	line-height: 1.5;
+}
+
+.ml-text-md {
+	font-size: var(--ml-font-size-md);
+	line-height: 1.6;
+}
+
+.ml-text-lg {
+	font-size: var(--ml-font-size-lg);
+	line-height: 1.6;
 }

@@ -40,6 +40,21 @@ Tokens disponíveis (definidos em `styles.scss`):
 - `--ml-space-lg`: 1.5rem — gap entre cartões.
 - `--ml-space-xl`: 2rem — espaçamento entre seções/rows.
 
+## Escalas utilitárias
+Use as classes globais para aplicar tamanhos padronizados sem duplicar CSS:
+
+| Classe | Aplicação | Observações |
+| --- | --- | --- |
+| `.ml-input-sm` / `.ml-input-md` / `.ml-input-lg` | Largura de `mat-form-field` e inputs nativos | Ajustam automaticamente via media queries (260–680px). |
+| `.ml-btn` / `.ml-btn-block` | Base flexível e largura fluida para botões Material | Combine com `mat-stroked/flat/raised`; `.ml-btn-block` expande para 100% do contêiner. |
+| `.ml-btn-sm` / `.ml-btn-md` / `.ml-btn-lg` | Controlam altura mínima, tipografia e largura mínima responsiva | Ajustam os tokens MDC (`--mdc-*-container-height`) para padronizar botões em qualquer variante. |
+| `.ml-card-sm` / `.ml-card-md` / `.ml-card-lg` | Define `max-width` e raio consistente para `mat-card` | Use em painéis internos (480/720/960px). |
+| `.ml-card-full` | Ocupa 100% da largura disponível respeitando `--ml-layout-max-width` | Ideal para contêineres principais, mantendo o cartão centralizado no shell. |
+| `.ml-card-left` / `.ml-card-center` / `.ml-card-right` | Controla alinhamento de cabeçalhos e conteúdos dentro do `mat-card` | Combine com as classes acima para definir direção visual do painel. |
+| `.ml-text-sm` / `.ml-text-md` / `.ml-text-lg` | Ajusta fonte e linha para trechos específicos | Útil para helper texts fora do `mat-typography`. |
+
+Sempre que criar novos componentes, prefira essas utilidades antes de adicionar SCSS local; se precisar de variação adicional, estenda `styles.scss` na sessão correspondente.
+
 ## Componentes Chave
 ### Cartões de Status (OK / Faltantes / Excedentes)
 - Devem ocupar a mesma row através do grid responsivo (`repeat(auto-fit, minmax(200px, 1fr))`).
@@ -65,7 +80,7 @@ Tokens disponíveis (definidos em `styles.scss`):
 - Campo de seleção usa `mat-form-field` com largura máxima de 520px, acompanhado de botão `mat-stroked-button` “Escolher arquivo”.
 - A ação “Importar lista” só dispara quando um arquivo estiver selecionado; exiba `mat-error` quando o operador tentar prosseguir sem arquivo.
 - Cards de status reutilizam o componente compartilhado sem sobrescrever tokens.
-- A prévia da tabela oficial deve ficar dentro de um `mat-card` com `class="import-page__table"` para herdar largura total e centralização.
+- A prévia da tabela oficial deve ficar dentro de um `mat-card` com `class="import-page__table ml-card-full ml-card-center"` para herdar largura total e centralização.
 
 ## Aplicação em Novos SCSS
 1. Importar apenas quando necessário (evitar duplicar `@use '@angular/material'`).

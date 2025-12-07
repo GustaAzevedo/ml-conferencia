@@ -1,12 +1,12 @@
-<mat-card appearance="outlined" class="import-panel">
+<mat-card appearance="outlined" class="import-panel ml-card-full ml-panel ml-card-center">
   <mat-card-header>
     <mat-card-title>Importar lista oficial</mat-card-title>
     <mat-card-subtitle>Selecione a planilha (IDs coluna A, motivos coluna C) e confirme a importação.</mat-card-subtitle>
   </mat-card-header>
 
-  <mat-card-content class="import-panel__content">
-    <div class="import-panel__input-grid">
-      <mat-form-field appearance="outline" class="import-panel__field">
+  <mat-card-content class="ml-panel__content">
+    <div class="ml-panel__grid">
+      <mat-form-field appearance="outline" class="import-panel__field ml-input-lg">
         <mat-label>Arquivo selecionado</mat-label>
         <input matInput [value]="lastFileName || 'Nenhum arquivo escolhido'" readonly required />
         <mat-hint>Processamento local — nada é enviado ao servidor.</mat-hint>
@@ -16,7 +16,7 @@
       <button
         mat-stroked-button
         color="primary"
-        class="import-panel__pick"
+        class="import-panel__pick ml-btn ml-btn-sm"
         type="button"
         [disabled]="isLoading"
         (click)="fileInput.click()"
@@ -44,11 +44,24 @@
     </mat-chip-set>
   </mat-card-content>
 
-  <mat-card-actions class="import-panel__actions">
-    <button mat-stroked-button type="button" (click)="clearSelection()" [disabled]="!lastFileName || isLoading">
+  <mat-card-actions class="ml-panel__actions">
+    <button
+      mat-stroked-button
+      type="button"
+      class="ml-btn ml-btn-sm"
+      (click)="clearSelection()"
+      [disabled]="!lastFileName || isLoading"
+    >
       Limpar seleção
     </button>
-    <button mat-flat-button color="primary" type="button" (click)="confirmImport()" [disabled]="isLoading">
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      class="ml-btn ml-btn-sm"
+      (click)="confirmImport()"
+      [disabled]="isLoading"
+    >
       Importar lista
       <mat-icon>arrow_forward</mat-icon>
     </button>

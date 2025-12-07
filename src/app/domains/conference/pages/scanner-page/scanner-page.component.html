@@ -11,7 +11,7 @@
     ></app-status-cards>
   </div>
 
-  <mat-card appearance="outlined" class="scanner-page__table" *ngIf="scannedRows().length; else emptyState">
+  <mat-card appearance="outlined" class="scanner-page__table ml-card-lg ml-card-full" *ngIf="scannedRows().length; else emptyState">
     <mat-card-header>
       <mat-card-title>Últimas bipagens</mat-card-title>
       <mat-card-subtitle>{{ scannedRows().length }} leituras</mat-card-subtitle>
@@ -22,7 +22,7 @@
   </mat-card>
 
   <ng-template #emptyState>
-    <mat-card appearance="outlined" class="scanner-page__table scanner-page__table--empty">
+    <mat-card appearance="outlined" class="scanner-page__table scanner-page__table--empty ml-card-lg ml-card-full">
       <mat-card-content>
         <p class="mat-body-medium">Nenhum código bípado nesta sessão.</p>
       </mat-card-content>

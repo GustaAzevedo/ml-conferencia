@@ -15,7 +15,7 @@
     ></app-status-cards>
   </div>
 
-  <mat-card appearance="outlined" class="import-page__table" *ngIf="officialRows().length; else emptyState">
+  <mat-card appearance="outlined" class="import-page__table ml-card-lg ml-card-full" *ngIf="officialRows().length; else emptyState">
     <mat-card-header>
       <mat-card-title>Prévia da lista oficial</mat-card-title>
       <mat-card-subtitle>{{ officialRows().length }} registros</mat-card-subtitle>
@@ -26,7 +26,7 @@
   </mat-card>
 
   <ng-template #emptyState>
-    <mat-card appearance="outlined" class="import-page__table import-page__table--empty">
+    <mat-card appearance="outlined" class="import-page__table import-page__table--empty ml-card-lg ml-card-full">
       <mat-card-content>
         <p class="mat-body-medium">Nenhum arquivo importado ainda. Utilize o painel acima para iniciar.</p>
       </mat-card-content>
