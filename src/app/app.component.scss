@@ -11,6 +11,13 @@
   z-index: 1000;
 }
 
+.app-toolbar__content {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: var(--ml-space-md, 1rem);
+}
+
 .app-toolbar__spacer {
   flex: 1 1 auto;
 }

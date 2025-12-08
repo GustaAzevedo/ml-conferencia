@@ -8,7 +8,7 @@ export class ScannerService {
 
   constructor() {}
 
-  // Emit a scanned code (in real app this would listen to keyboard events or hardware)
+  // Emite um código escaneado (em produção ouviria teclado ou hardware dedicado)
   emitScan(code: string) {
     this._scan$.next(code);
   }

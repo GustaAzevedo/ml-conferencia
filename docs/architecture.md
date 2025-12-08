@@ -24,7 +24,7 @@
 
 ## Componentes Principais
 - **ImportPageComponent**: orquestra o upload, administra `isLoading`/`errorMessage`, traduz as colunas (A → ID numérico, C → motivo) e aplica `ConferenceStore.setOfficial` + `ConferenceStream.emitImport` ao finalizar a leitura.
-- **ScannerPageComponent**: injeta `ScannerService` e inscreve-se em `scan$` com `takeUntilDestroyed`, atualizando o store (`addScanned`) e emitindo `ConferenceStream.emitScan` para efeitos derivados.
+- **ScannerPageComponent**: injeta `ScannerService`, inscreve-se em `scan$` com `takeUntilDestroyed`, bloqueia duplicidades com `ConferenceStore.addScanned` e, quando necessário, alerta o operador via `MatSnackBar` antes de emitir `ConferenceStream.emitScan`.
 - **DashboardPageComponent**: consome apenas Signals computadas do `ConferenceStore` e reutiliza `StatusCardsComponent` para exibir KPIs.
 - **ImportPanelComponent**: encapsula o `<input type="file">`, valida o `FileList` e emite um `File` seguro para a página.
 - **ScanInputComponent**: captura entradas manuais e as envia para `ScannerService.emitScan`, garantindo que o fluxo manual/hardware compartilhe a mesma fonte de verdade.
@@ -50,8 +50,8 @@
 1. `ScannerService` recebe eventos por duas fontes: hardware (listener registrado no serviço) e `ScanInputComponent` (manual) via `emitScan`.
 2. `ScannerPageComponent` injeta o serviço e se inscreve em `scan$` usando `takeUntilDestroyed`.
 3. A cada código:
-  - `ConferenceStore.addScanned(code)` persiste a leitura e recalcula `totals`.
-  - `ConferenceStream.emitScan(code)` propaga o evento para integrações.
+  - `ConferenceStore.addScanned(code)` verifica duplicidade; se o ID já existir nada é salvo e um aviso visual é disparado.
+  - Quando a inclusão é aceita, `ConferenceStream.emitScan(code)` propaga o evento para integrações e dashboards.
 4. O componente também expõe `handleManualEntry` que delega para `ScannerService.emitScan`, mantendo uma única fonte de verdade.
 5. `StatusCardsComponent` e `GridTableComponent` usam `scannedRows` para mostrar o progresso em tempo real.
 
@@ -74,5 +74,5 @@ graph TD;
 
 ## Próximas Evoluções
 - Persistir estado com `StorageService` para manter a conferência mesmo após refresh.
-- Adicionar notificações para conflitos (duplicidades, leituras inválidas).
+- Expandir notificações para outros conflitos (erros de hardware, motivos inválidos) aproveitando o padrão aplicado às duplicidades.
 - Criar módulos adicionais (devoluções, inventário) reutilizando o mesmo padrão de rotas lazy + Signals.

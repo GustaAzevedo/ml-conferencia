@@ -75,17 +75,23 @@ export class ConferenceStore {
     return totals;
   });
 
-  // Overwrites the official list with the imported IDs.
+  // Sobrescreve a lista oficial com os IDs importados.
   setOfficial(list: OfficialEntry[]) {
     this._state.set({ ...this._state(), officialList: list });
   }
 
-  // Adds a new scanned ID at the end of the list.
-  addScanned(id: string) {
-    this._state.set({ ...this._state(), scannedList: [...this._state().scannedList, id] });
+  // Adiciona um novo ID escaneado quando ainda não existe.
+  addScanned(id: string): boolean {
+    const current = this._state().scannedList;
+    if (current.includes(id)) {
+      return false;
+    }
+
+    this._state.set({ ...this._state(), scannedList: [...current, id] });
+    return true;
   }
 
-  // Utility for tests and UI to clear both lists when reiniciating a conference.
+  // Utilitário para testes e UI limparem as listas ao reiniciar a conferência.
   reset() {
     this._state.set({ officialList: [], scannedList: [] });
   }
