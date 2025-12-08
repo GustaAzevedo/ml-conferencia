@@ -31,6 +31,14 @@ export class ImportPageComponent {
   // Colunas da grid definidas uma vez para manter o template simples.
   readonly gridColumns = ['ordem', 'id', 'motivo'];
 
+  // Define classes condicionais para a grid de prévia oficial.
+  readonly rowClassByStatus = (row: { estado?: string }) =>
+    row.estado === 'OK'
+      ? 'ml-row-ok'
+      : row.estado === 'MISSING'
+        ? 'ml-row-missing'
+        : undefined;
+
   // Trata o arquivo emitido pelo painel de importação.
   async handleFileSelected(file: File) {
     this.errorMessage.set(null);

@@ -52,6 +52,7 @@ Use as classes globais para aplicar tamanhos padronizados sem duplicar CSS:
 | `.ml-card-full` | Ocupa 100% da largura disponível respeitando `--ml-layout-max-width` | Ideal para contêineres principais, mantendo o cartão centralizado no shell. |
 | `.ml-card-left` / `.ml-card-center` / `.ml-card-right` | Controla alinhamento de cabeçalhos e conteúdos dentro do `mat-card` | Combine com as classes acima para definir direção visual do painel. |
 | `.ml-text-sm` / `.ml-text-md` / `.ml-text-lg` | Ajusta fonte e linha para trechos específicos | Útil para helper texts fora do `mat-typography`. |
+| `.ml-row-ok` / `.ml-row-missing` | Aplicadas via `rowClassFn` em `app-grid-table` para destacar linhas da prévia oficial | `.ml-row-ok` usa verde suave, `.ml-row-missing` usa amarelo suave conforme tokens globais. |
 
 Sempre que criar novos componentes, prefira essas utilidades antes de adicionar SCSS local; se precisar de variação adicional, estenda `styles.scss` na sessão correspondente.
 

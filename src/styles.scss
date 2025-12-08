@@ -306,3 +306,13 @@ body {
 	font-size: var(--ml-font-size-lg);
 	line-height: 1.6;
 }
+
+.ml-row-ok {
+	background: var(--ml-color-success-soft, #e8f5e9) !important;
+	color: var(--ml-color-success, #2e7d32) !important;
+}
+
+.ml-row-missing {
+	background: var(--ml-color-warning-soft, #fff8e1) !important;
+	color: var(--ml-color-warning, #f9a825) !important;
+}

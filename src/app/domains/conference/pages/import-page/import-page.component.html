@@ -21,7 +21,11 @@
       <mat-card-subtitle>{{ officialRows().length }} registros</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <app-grid-table [columns]="gridColumns" [rows]="officialRows()"></app-grid-table>
+      <app-grid-table
+        [columns]="gridColumns"
+        [rows]="officialRows()"
+        [rowClassFn]="rowClassByStatus"
+      ></app-grid-table>
     </mat-card-content>
   </mat-card>
 

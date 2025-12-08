@@ -11,6 +11,7 @@ Visão consolidada das principais peças do domínio Conference e suas responsab
   - Centralizar lógica de validação em métodos dedicados (`confirmImport`, `clearSelection`).
   - Em testes, utilize `createFileChangeMock` para simular eventos em `<input type="file">`.
 - **Cobertura de testes**: `import-panel.component.spec.ts` garante fluxo feliz, validação negativa, limpeza manual e evento sem arquivo.
+- **Prévia oficial**: após a importação, a grid recebe classes globais (`.ml-row-ok`, `.ml-row-missing`) para diferenciar IDs já escaneados dos que ainda aguardam conferência.
 
 ## ScanInputComponent
 - **Função**: receber entradas manuais ou via scanner conectado e propagá-las para o container.

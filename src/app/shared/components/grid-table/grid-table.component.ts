@@ -15,8 +15,18 @@ export class GridTableComponent {
   @Input() columns: string[] = [];
   // Objetos arbitrários para que o componente permaneça genérico.
   @Input() rows: any[] = [];
+  // Permite aplicar classes CSS dinâmicas baseado na linha renderizada.
+  @Input() rowClassFn: ((row: any) => string | string[] | undefined) | null = null;
 
   get displayedColumns(): string[] {
     return this.columns;
   }
+
+	resolveRowClasses(row: any): string[] {
+		const value = this.rowClassFn?.(row);
+		if (!value) {
+			return [];
+		}
+		return Array.isArray(value) ? value : [value];
+	}
 }

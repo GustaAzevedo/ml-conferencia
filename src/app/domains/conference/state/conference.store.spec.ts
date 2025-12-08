@@ -24,8 +24,33 @@ describe('ConferenceStore', () => {
     store.setOfficial(lista as any);
 
     expect(store.officialRows()).toEqual([
-      { ordem: 1, id: '100', motivo: ISSUE_REASON_LABELS['produto-danificado'] },
-      { ordem: 2, id: '200', motivo: ISSUE_REASON_LABELS['destinatario-ausente'] }
+      {
+        ordem: 1,
+        id: '100',
+        motivo: ISSUE_REASON_LABELS['produto-danificado'],
+        estado: 'MISSING'
+      },
+      {
+        ordem: 2,
+        id: '200',
+        motivo: ISSUE_REASON_LABELS['destinatario-ausente'],
+        estado: 'MISSING'
+      }
+    ]);
+  });
+
+  it('deve marcar estado OK quando o ID já foi escaneado', () => {
+    const lista: OfficialEntryStub[] = [{ id: '123', issue: 'produto-danificado' }];
+    store.setOfficial(lista as any);
+    store.addScanned('123');
+
+    expect(store.officialRows()).toEqual([
+      {
+        ordem: 1,
+        id: '123',
+        motivo: ISSUE_REASON_LABELS['produto-danificado'],
+        estado: 'OK'
+      }
     ]);
   });
 

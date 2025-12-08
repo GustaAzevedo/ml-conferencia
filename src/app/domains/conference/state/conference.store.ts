@@ -47,13 +47,15 @@ export class ConferenceStore {
   });
 
   // Tabular projection of the official list is used by the import preview table.
-  readonly officialRows = computed(() =>
-    this._state().officialList.map((entry, index) => ({
+  readonly officialRows = computed(() => {
+    const scannedSet = new Set(this._state().scannedList);
+    return this._state().officialList.map((entry, index) => ({
       ordem: index + 1,
       id: entry.id,
-      motivo: ISSUE_REASON_LABELS[entry.issue]
-    }))
-  );
+      motivo: ISSUE_REASON_LABELS[entry.issue],
+      estado: scannedSet.has(entry.id) ? 'OK' : 'MISSING'
+    }));
+  });
 
   // Tabular projection of scanned data supports diagnostics in the scanner view.
   readonly scannedRows = computed(() =>
